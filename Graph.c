@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <assert.h>
 #include <string.h>
-#include "Graph.h"
+#include "graph.h"
 
 
 // graph representation (adjacency matrix)

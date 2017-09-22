@@ -1,3 +1,4 @@
-C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug/CMakeFiles/ass2.dir
-C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/eushaun/ass2/2521Ass2/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/eushaun/ass2/2521Ass2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/eushaun/ass2/2521Ass2/cmake-build-debug/CMakeFiles/inverted.dir
+/home/eushaun/ass2/2521Ass2/cmake-build-debug/CMakeFiles/pagerank.dir
