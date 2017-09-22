@@ -96,3 +96,15 @@ void showGraph(Graph g, char **names)
 	}
 }
 
+void showGraph2(Graph g)
+{
+	assert(g != NULL);
+	printf("#vertices=%d, #edges=%d\n\n",g->nV,g->nE);
+	int v, w;
+	for (v = 0; v < g->nV; v++) {
+		for (w = 0; w < g->nV; w++) {
+			printf("%d", g->edges[v][w]);
+		}
+		printf("\n");
+	}
+}

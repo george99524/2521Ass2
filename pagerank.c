@@ -10,6 +10,7 @@ int getID(char* string, char** list, int url_count);
 int getURLCount();
 void getURLList(int url_count, char** list);
 
+
 // Builds Weighted Graph from collections.txt
 Graph buildGraph() {
 
@@ -45,15 +46,16 @@ Graph buildGraph() {
             }
 
             if (flag==1) {
-                printf("%s\n", url);
-                printf("%d\n", getID(url, url_list, url_count));
-
+                //printf("%s\n", url);
+                //printf("%d\n", getID(url, url_list, url_count));
+                insertEdge(G, getID(buffer, url_list, url_count), getID(url, url_list, url_count), 1);
             }
         }
-        printf("\n");
+        //printf("\n");
     }
 
     fclose(fp);
+    showGraph2(G);
     return G;
 }
 
@@ -102,3 +104,5 @@ void getURLList(int url_count, char** list) {
         i++;
     }
 }
+
+
