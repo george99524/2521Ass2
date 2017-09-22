@@ -10,7 +10,7 @@
 typedef struct GraphRep *Graph;
 
 // vertices denoted by integers 0..N-1
-typedef char* Vertex;
+typedef int Vertex;
 int   validV(Graph,Vertex); //validity check
 
 // edges are pairs of vertices (end-points)

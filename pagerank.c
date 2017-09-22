@@ -6,29 +6,22 @@
 #include <unistd.h>
 
 Graph buildGraph();
+int getID(char* string, char** list, int url_count);
+int getURLCount();
+void getURLList(int url_count, char** list);
 
 // Builds Weighted Graph from collections.txt
 Graph buildGraph() {
 
-    FILE *fp;
-    if ((fp = fopen("collection.txt", "r"))==NULL) {
-        perror("No such file");
-        return NULL;
-    }
-
-    char url[100];
-    int url_count = 0;
-    while (fscanf(fp, "%s", url)!=EOF) {
-        url_count++;
-        //printf("%s\n", url);
-    }
-    fclose(fp);
-    //printf("%d\n", url_count);
+    int url_count = getURLCount();
 
     Graph G = newGraph(url_count);
+    char *url_list[url_count];
+    getURLList(url_count, url_list);
 
+    FILE *fp;
     fp = fopen("collection.txt", "r");
-    char buffer[100];
+    char buffer[100], url[100];
     while (fscanf(fp, "%s", buffer)!=EOF) {
         char temp_string[1000];
         strcpy(temp_string, buffer);
@@ -44,6 +37,7 @@ Graph buildGraph() {
             if (strcmp(url, section1)==0) {
                 if (flag==0) {
                     flag = 1;
+                    continue;
                 }
             }
             if (strcmp(url, end)==0 && flag==1) {
@@ -52,7 +46,7 @@ Graph buildGraph() {
 
             if (flag==1) {
                 printf("%s\n", url);
-                //WE NEED TO ADD EDGES BETWEEN THE VERTICES NOW
+                printf("%d\n", getID(url, url_list, url_count));
 
             }
         }
@@ -67,4 +61,44 @@ int main(void) {
 
     buildGraph();
     return 0;
+}
+
+int getID(char* string, char** list, int url_count) {
+    int id = 0;
+    while(id<url_count && strcmp(list[id], string)) {
+        id++;
+    }
+    return id == url_count ? -1 : id;
+}
+
+int getURLCount() {
+    FILE *fp;
+    if ((fp = fopen("collection.txt", "r"))==NULL) {
+        perror("No such file");
+        return 0;
+    }
+
+    char url[100];
+    int url_count = 0;
+    while (fscanf(fp, "%s", url)!=EOF) {
+        url_count++;
+        //printf("%s\n", url);
+    }
+    fclose(fp);
+
+    return url_count;
+}
+
+void getURLList(int url_count, char** list) {
+    int i = 0;
+    FILE *fp;
+    char url[100];
+
+    fp = fopen("collection.txt", "r");
+    while (i<url_count) {
+        fscanf(fp, "%s", url);
+        list[i] = malloc(100);
+        strcpy(list[i], url);
+        i++;
+    }
 }
