@@ -216,9 +216,9 @@ double getWeightOut(int i, int j, int url_count, Graph G) {
     return weight;
 }
 
-int getInLink(int i, int url_count, Graph G) {
+double getInLink(int i, int url_count, Graph G) {
 	int x = 0;
-	int count = 0;
+	double count = 0;
 	while (x<url_count) {
 		if (edgeExists(G, x, i)==1) count++;
 		x++;
@@ -226,13 +226,14 @@ int getInLink(int i, int url_count, Graph G) {
 	return count;
 }
 
-int getOutLink(int i, int url_count, Graph G) {
+double getOutLink(int i, int url_count, Graph G) {
 	int x = 0;
-	int count = 0;
+	double count = 0;
 	while (x<url_count) {
 		if (edgeExists(G, i, x)==1) count++;
 		x++;
 	}
+    if (count == 0) count = 0.5;
 	return count;
 }
 

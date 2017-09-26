@@ -27,8 +27,8 @@ double getWeightIn(int i, int j, int url_count, Graph G);
 
 double getWeightOut(int i, int j, int url_count, Graph G);
 
-int getInLink(int i, int url_count, Graph G);
+double getInLink(int i, int url_count, Graph G);
 
-int getOutLink(int i, int url_count, Graph G);
+double getOutLink(int i, int url_count, Graph G);
 
 #endif
