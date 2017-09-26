@@ -1,4 +1,4 @@
-/opt/clion-2017.2.2/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/eushaun/ass2/2521Ass2
+"C:\Program Files\JetBrains\CLion 2017.2.2\bin\cmake\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" C:\Users\George\Desktop\UNSW\cs2521\ass2
 -- Configuring done
 -- Generating done
--- Build files have been written to: /home/eushaun/ass2/2521Ass2/cmake-build-debug
+-- Build files have been written to: C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug

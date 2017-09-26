@@ -150,6 +150,92 @@ void PageRankW(Graph g, double d, double diffPR, double maxIt) {
 	}
 }
 
+int buildInWeights(double** Weights, int url_count, Graph G) {
+	int i = 0;
+	while (i<url_count) {
+		int j = 0;
+		while (j<url_count) {
+            if (edgeExists(G, i ,j)==1) {
+                Weights[i][j] = getWeightIn(i, j, url_count, G);
+            }
+			j++;
+		}
+		i++;
+	}
+	return 1;
+}
+
+int buildOutWeights(double** Weights, int url_count, Graph G) {
+    int i = 0;
+    while (i<url_count) {
+        int j = 0;
+        while (j<url_count) {
+            if (edgeExists(G, i ,j)==1) {
+                Weights[i][j] = getWeightOut(i, j, url_count, G);
+            }
+            j++;
+        }
+        i++;
+    }
+    return 1;
+}
+
+double getWeightIn(int i, int j, int url_count, Graph G) {
+	double weight = 0;
+
+    int nom = getInLink(j, url_count, G);
+	int x = 0;
+    int denom = 0;
+	while (x<url_count) {
+		if (edgeExists(G, i, x)==1) {
+            denom += getInLink(x, url_count, G);
+		}
+		x++;
+	}
+
+    weight = (double) nom/ denom;
+    //printf("weight = %lf\n", weight);
+	return weight;
+}
+
+double getWeightOut(int i, int j, int url_count, Graph G) {
+    double weight = 0;
+
+    int nom = getOutLink(j, url_count, G);
+    int x = 0;
+    int denom = 0;
+    while (x<url_count) {
+        if (edgeExists(G, i, x)==1) {
+            denom += getOutLink(x, url_count, G);
+        }
+        x++;
+    }
+
+    weight = (double) nom/ denom;
+    //printf("weight = %lf\n", weight);
+    return weight;
+}
+
+int getInLink(int i, int url_count, Graph G) {
+	int x = 0;
+	int count = 0;
+	while (x<url_count) {
+		if (edgeExists(G, x, i)==1) count++;
+		x++;
+	}
+	return count;
+}
+
+int getOutLink(int i, int url_count, Graph G) {
+	int x = 0;
+	int count = 0;
+	while (x<url_count) {
+		if (edgeExists(G, i, x)==1) count++;
+		x++;
+	}
+	return count;
+}
+
 int main(int argc, char **argv) {
 
 	if (argc != 4) {
@@ -163,7 +249,37 @@ int main(int argc, char **argv) {
 
 	int url_count = getURLCount();
 	Graph g = buildGraph();
-	PageRankW(g, d, diffPR, maxIt);
+	double **In_Weights = calloc(url_count, sizeof(double *));
+    for (int i=0; i<url_count; i++) {
+        In_Weights[i] = calloc(url_count, sizeof(double));
+    }
+    assert(In_Weights!=NULL);
+	buildInWeights(In_Weights, url_count, g);
+    double **Out_Weights = calloc(url_count, sizeof(double *));
+    for (int i=0; i<url_count; i++) {
+        Out_Weights[i] = calloc(url_count, sizeof(double));
+    }
+    assert(Out_Weights!=NULL);
+    buildOutWeights(Out_Weights, url_count, g);
+
+    /////////// This is just printing out the Graph///////////////
+    for (int i = 0; i < url_count; i++) {
+        for (int j = 0; j < url_count; j++) {
+            printf("%3lf ", In_Weights[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
+    for (int i = 0; i < url_count; i++) {
+        for (int j = 0; j < url_count; j++) {
+            printf("%3lf ", Out_Weights[i][j]);
+        }
+        printf("\n");
+    }
+    showGraph2(g);
+    /////////// This is just printing out the Graph///////////////
+
+	//PageRankW(g, d, diffPR, maxIt);
 
 	int outCount[url_count];
 	for (int i = 0; i < url_count; i++) {

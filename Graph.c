@@ -96,6 +96,11 @@ void showGraph(Graph g, char **names)
 	}
 }
 
+int edgeExists(Graph g, int i, int j) {
+	assert(g != NULL);
+	return g->edges[i][j]==1;
+}
+
 void showGraph2(Graph g)
 {
 	assert(g != NULL);

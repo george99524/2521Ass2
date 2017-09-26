@@ -1,0 +1,42 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/George/Desktop/UNSW/cs2521/ass2/Graph.c
+stdlib.h
+-
+stdio.h
+-
+assert.h
+-
+string.h
+-
+graph.h
+C:/Users/George/Desktop/UNSW/cs2521/ass2/graph.h
+
+C:/Users/George/Desktop/UNSW/cs2521/ass2/graph.h
+stdio.h
+-
+
+C:/Users/George/Desktop/UNSW/cs2521/ass2/inverted.c
+stdlib.h
+-
+stdio.h
+-
+inverted.h
+C:/Users/George/Desktop/UNSW/cs2521/ass2/inverted.h
+pagerank.h
+C:/Users/George/Desktop/UNSW/cs2521/ass2/pagerank.h
+graph.h
+C:/Users/George/Desktop/UNSW/cs2521/ass2/graph.h
+
+C:/Users/George/Desktop/UNSW/cs2521/ass2/inverted.h
+
+C:/Users/George/Desktop/UNSW/cs2521/ass2/pagerank.h
+graph.h
+C:/Users/George/Desktop/UNSW/cs2521/ass2/graph.h
+

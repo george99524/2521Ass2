@@ -11,11 +11,3 @@ set(SOURCE_FILES_1
 
 add_executable(pagerank ${SOURCE_FILES_1})
 
-set(SOURCE_FILES_2
-		Graph.c
-		graph.h
-		inverted.c
-		inverted.h
-		pagerank.h)
-
-add_executable(inverted ${SOURCE_FILES_2})
