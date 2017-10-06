@@ -5,7 +5,7 @@
 #include "graph.h"
 #include <unistd.h>
 #include "math.h"
-#include "pagerank.h"
+#include "url.h"
 
 // Builds Weighted Graph from collections.txt
 Graph buildGraph() {
@@ -64,7 +64,7 @@ int getID(char *string, char **list, int url_count) {
 int getURLCount() {
 	FILE *fp;
 	if ((fp = fopen("collection.txt", "r")) == NULL) {
-		perror("No such file");
+		perror("collection.txt not found");
 		return 0;
 	}
 
@@ -84,19 +84,23 @@ void getURLList(int url_count, char **list) {
 	FILE *fp;
 	char url[100];
 
-	fp = fopen("collection.txt", "r");
+	if ((fp = fopen("collection.txt", "r")) == NULL) {
+		perror("collection.txt not found");
+		return;
+	}
 	while (i < url_count) {
 		fscanf(fp, "%s", url);
 		list[i] = malloc(100);
 		strcpy(list[i], url);
 		i++;
 	}
+	fclose(fp);
 }
 
 void getOutCount(int url_count, int *out_count) {
 	FILE *fp;
 	if ((fp = fopen("collection.txt", "r")) == NULL) {
-		perror("No such file");
+		perror("collection.txt not found");
 		return;
 	}
 
@@ -118,6 +122,7 @@ void getOutCount(int url_count, int *out_count) {
 			}
 			out_count[i]++;
 		}
+		fclose(fp2);
 	}
 	for (i = 0; i < url_count; i++) {
 		out_count[i] -= 2;    //delete first 2 letters (#start Section-1)
@@ -125,39 +130,14 @@ void getOutCount(int url_count, int *out_count) {
 	fclose(fp);
 }
 
-void PageRankW(Graph g, double d, double diffPR, double maxIt) {
-	int n = getURLCount();
-	double pr[n];    // array containing page ranks of each url
-	double prOld[n];    // old page ranks
-
-	for (int i = 0; i < n; i++) {
-		pr[i] = (double) 1 / n;
-		prOld[i] = pr[i];
-	}
-	int it = 0;
-	double diff = diffPR;
-	while (it < maxIt && diff >= diffPR) {
-		for (int i = 0; i < n; i++) {
-
-			/*
-			 * pr[i] = (1 - d) / n + d;
-			 */
-
-			double tmp = fabs(pr[i] - prOld[i]);
-			diff += tmp;
-		}
-		it++;
-	}
-}
-
-int buildInWeights(double** Weights, int url_count, Graph G) {
+int buildInWeights(double **Weights, int url_count, Graph G) {
 	int i = 0;
-	while (i<url_count) {
+	while (i < url_count) {
 		int j = 0;
-		while (j<url_count) {
-            if (edgeExists(G, i ,j)==1) {
-                Weights[i][j] = getWeightIn(i, j, url_count, G);
-            }
+		while (j < url_count) {
+			if (edgeExists(G, i, j)) {
+				Weights[i][j] = getWeightIn(i, j, url_count, G);
+			}
 			j++;
 		}
 		i++;
@@ -165,62 +145,62 @@ int buildInWeights(double** Weights, int url_count, Graph G) {
 	return 1;
 }
 
-int buildOutWeights(double** Weights, int url_count, Graph G) {
-    int i = 0;
-    while (i<url_count) {
-        int j = 0;
-        while (j<url_count) {
-            if (edgeExists(G, i ,j)==1) {
-                Weights[i][j] = getWeightOut(i, j, url_count, G);
-            }
-            j++;
-        }
-        i++;
-    }
-    return 1;
+int buildOutWeights(double **Weights, int url_count, Graph G) {
+	int i = 0;
+	while (i < url_count) {
+		int j = 0;
+		while (j < url_count) {
+			if (edgeExists(G, i, j) == 1) {
+				Weights[i][j] = getWeightOut(i, j, url_count, G);
+			}
+			j++;
+		}
+		i++;
+	}
+	return 1;
 }
 
 double getWeightIn(int i, int j, int url_count, Graph G) {
 	double weight = 0;
 
-    int nom = getInLink(j, url_count, G);
+	double nom = getInLink(j, url_count, G);
 	int x = 0;
-    int denom = 0;
-	while (x<url_count) {
-		if (edgeExists(G, i, x)==1) {
-            denom += getInLink(x, url_count, G);
+	int denom = 0;
+	while (x < url_count) {
+		if (edgeExists(G, i, x)) {
+			denom += getInLink(x, url_count, G);
 		}
 		x++;
 	}
 
-    weight = (double) nom/ denom;
-    //printf("weight = %lf\n", weight);
+	weight = nom / denom;
+	//printf("weight = %lf\n", weight);
 	return weight;
 }
 
 double getWeightOut(int i, int j, int url_count, Graph G) {
-    double weight = 0;
+	double weight = 0;
 
-    int nom = getOutLink(j, url_count, G);
-    int x = 0;
-    int denom = 0;
-    while (x<url_count) {
-        if (edgeExists(G, i, x)==1) {
-            denom += getOutLink(x, url_count, G);
-        }
-        x++;
-    }
+	double nom = getOutLink(j, url_count, G);
+	int x = 0;
+	int denom = 0;
+	while (x < url_count) {
+		if (edgeExists(G, i, x) == 1) {
+			denom += getOutLink(x, url_count, G);
+		}
+		x++;
+	}
 
-    weight = (double) nom/ denom;
-    //printf("weight = %lf\n", weight);
-    return weight;
+	weight = nom / denom;
+	//printf("weight = %lf\n", weight);
+	return weight;
 }
 
 double getInLink(int i, int url_count, Graph G) {
 	int x = 0;
 	double count = 0;
-	while (x<url_count) {
-		if (edgeExists(G, x, i)==1) count++;
+	while (x < url_count) {
+		if (edgeExists(G, x, i) == 1) count++;
 		x++;
 	}
 	return count;
@@ -229,14 +209,25 @@ double getInLink(int i, int url_count, Graph G) {
 double getOutLink(int i, int url_count, Graph G) {
 	int x = 0;
 	double count = 0;
-	while (x<url_count) {
-		if (edgeExists(G, i, x)==1) count++;
+	while (x < url_count) {
+		if (edgeExists(G, i, x) == 1) count++;
 		x++;
 	}
-    if (count == 0) count = 0.5;
+	if (count == 0) count = 0.5;
 	return count;
 }
 
+int getOutLinkID(int x, int url_count, Graph G, int *outLinkID) {
+	int j = 0;
+	for (int i = 0; i < url_count; i++) {
+		if (edgeExists(G, x, i)) {
+			outLinkID[j] = i;
+			j++;
+		}
+	}
+	return 1;
+}
+/*
 int main(int argc, char **argv) {
 
 	if (argc != 4) {
@@ -250,19 +241,21 @@ int main(int argc, char **argv) {
 
 	int url_count = getURLCount();
 	Graph g = buildGraph();
-	double **In_Weights = calloc(url_count, sizeof(double *));
-    for (int i=0; i<url_count; i++) {
-        In_Weights[i] = calloc(url_count, sizeof(double));
-    }
-    assert(In_Weights!=NULL);
-	buildInWeights(In_Weights, url_count, g);
-    double **Out_Weights = calloc(url_count, sizeof(double *));
-    for (int i=0; i<url_count; i++) {
-        Out_Weights[i] = calloc(url_count, sizeof(double));
-    }
-    assert(Out_Weights!=NULL);
-    buildOutWeights(Out_Weights, url_count, g);
 
+	double **In_Weights = calloc(url_count, sizeof(double *));
+	for (int i = 0; i < url_count; i++) {
+		In_Weights[i] = calloc(url_count, sizeof(double));
+	}
+	assert(In_Weights != NULL);
+	buildInWeights(In_Weights, url_count, g);
+
+	double **Out_Weights = calloc(url_count, sizeof(double *));
+	for (int i = 0; i < url_count; i++) {
+		Out_Weights[i] = calloc(url_count, sizeof(double));
+	}
+	assert(Out_Weights != NULL);
+	buildOutWeights(Out_Weights, url_count, g);
+/*
     /////////// This is just printing out the Graph///////////////
     for (int i = 0; i < url_count; i++) {
         for (int j = 0; j < url_count; j++) {
@@ -277,26 +270,60 @@ int main(int argc, char **argv) {
         }
         printf("\n");
     }
-    showGraph2(g);
+    //showGraph2(g);
     /////////// This is just printing out the Graph///////////////
 
-	//PageRankW(g, d, diffPR, maxIt);
 
+	double pr[url_count];    // array containing page ranks of each url
+	double prOld[url_count];    // old page ranks
+
+	// get initial pagerank for each URLs
+	for (int i = 0; i < url_count; i++) {
+		pr[i] = (double) 1 / url_count;
+		prOld[i] = pr[i];
+	}
+
+	// get list of URLs
+	char *url_list[url_count];
+	getURLList(url_count, url_list);
+
+	// get out degrees of URLs
 	int outCount[url_count];
 	for (int i = 0; i < url_count; i++) {
 		outCount[i] = 0;
 	}
 	getOutCount(url_count, outCount);
 
-	char *url_list[url_count];
-	getURLList(url_count, url_list);
+	// pagerank algorithm
+	int it = 0;
+	double diff = diffPR;
+	int *outID = calloc(url_count, sizeof(int));
+	for(int i=0;i<url_count;i++){
+		outID[i] = -1;
+	}
+	int sumPr = 0;
+	while (it < maxIt && diff >= diffPR) {
+		for (int i = 0; i < url_count; i++) {
+			getOutLinkID(i, url_count, g, outID);
+			for(int j=0;j<url_count;j++){
+				sumPr += prOld[outID[j]];
+			}
+			pr[i] = ((1 - d) / url_count) + d*sumPr*In_Weights[i][j]*Out_Weights[i][j];
+			double tmp = fabs(pr[i] - prOld[i]);
+			diff += tmp;
+			for (int k=0;k<url_count;k++){
+				prOld[k] = pr[k];
+			}
+		}
+		it++;
+	}
 
 	FILE *fp = fopen("pagerankList.txt", "w");
 	for (int i = 0; i < url_count; i++) {
-		//printf("%d ", outCount[i]);
-		fprintf(fp, "%s, %d\n", url_list[i], outCount[i]);
+		fprintf(fp, "%s, %d, %.8lf\n", url_list[i], outCount[i], pr[i]);
 	}
+	fclose(fp);
 
 	return EXIT_SUCCESS;
 }
-
+*/

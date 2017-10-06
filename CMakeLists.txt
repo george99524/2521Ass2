@@ -7,7 +7,19 @@ set(SOURCE_FILES_1
 		Graph.c
 		graph.h
 		pagerank.c
-		pagerank.h)
+		url.h
+		url.c)
 
 add_executable(pagerank ${SOURCE_FILES_1})
 
+set(SOURCE_FILES_2
+		BSTree.c
+		BSTree.h
+		Graph.c
+		graph.h
+		inverted.c
+		inverted.h
+		url.h
+		url.c)
+
+add_executable(inverted ${SOURCE_FILES_2})
