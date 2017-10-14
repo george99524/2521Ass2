@@ -170,7 +170,7 @@ int main(int argc, char **argv) {
 			printf("%s\n", urlList[j]);
 		}
 	}
-
+/*
 	printf("\n");
 	for (int j = 0; j < size; j++) {
 		printf("%s     ", urlList[j]);
@@ -183,7 +183,7 @@ int main(int argc, char **argv) {
 	for (int j = 0; j < size; j++) {
 		printf("%.7lf ", pagerankURL[j]);
 	}
-
+*/
 
 	return EXIT_SUCCESS;
 }
