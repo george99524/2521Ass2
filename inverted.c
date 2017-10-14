@@ -3,26 +3,6 @@
 #include "url.h"
 #include "BSTree.h"
 #include <string.h>
-#include <ctype.h>
-
-void normalise(char word[]) {
-
-	// convert to lower case
-	//for (int i = 0; word[i]; i++) {
-	//	word[i] = tolower(word[i]);
-	//}
-	// remove all non-alphabets
-	for (int i = 0; word[i]; i++) {
-		word[i] = tolower(word[i]);
-		while (!(isalpha(word[i]) || word[i] == '\0')) {
-			int j = 0;
-			for (j = i; word[j] != '\0'; ++j) {
-				word[j] = word[j + 1];
-			}
-			word[j] = '\0';
-		}
-	}
-}
 
 int main() {
 	// get number of URLs in file
@@ -37,7 +17,7 @@ int main() {
 
 	for (int i = 0; i < url_count; i++) {
 		//temp string to store URL
-		char tmp_url[20];
+		char tmp_url[30];
 		strcpy(tmp_url, url_list[i]);
 		strcat(tmp_url, ".txt");
 		if ((fp = fopen(tmp_url, "r")) == NULL) {

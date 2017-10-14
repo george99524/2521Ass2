@@ -19,10 +19,8 @@ typedef struct BSTNode {
 // used to insert URLs
 typedef struct DLListNode {
 	char *url;  // value of this list item (string)
-	struct DLListNode *prev;
-	// pointer previous node in list
-	struct DLListNode *next;
-	// pointer to next node in list
+	struct DLListNode *prev;    // pointer previous node in list
+	struct DLListNode *next;    // pointer to next node in list
 } DLListNode;
 
 typedef struct DLListRep {

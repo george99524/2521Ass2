@@ -5,6 +5,7 @@
 #include <string.h>
 #include "graph.h"
 #include <unistd.h>
+#include <ctype.h>
 #include "url.h"
 
 // Builds Weighted Graph from collections.txt
@@ -228,4 +229,19 @@ int getOutLinkID(int x, int url_count, Graph G, int *outLinkID) {
 	return 1;
 }
 
+void normalise(char word[]) {
+
+	// convert to lower case and
+	// remove all non-alphabets
+	for (int i = 0; word[i]; i++) {
+		word[i] = tolower(word[i]);
+		while (!(isalnum(word[i]) || word[i] == '\0')) {
+			int j = 0;
+			for (j = i; word[j] != '\0'; ++j) {
+				word[j] = word[j + 1];
+			}
+			word[j] = '\0';
+		}
+	}
+}
 
