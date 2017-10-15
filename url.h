@@ -29,4 +29,6 @@ double getInLink(int i, int url_count, Graph G);
 
 double getOutLink(int i, int url_count, Graph G);
 
+void normalise(char word[]);
+
 #endif
