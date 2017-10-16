@@ -1,3 +1,6 @@
 C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug/CMakeFiles/inverted.dir
 C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug/CMakeFiles/pagerank.dir
+C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug/CMakeFiles/scaledFootrule.dir
+C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug/CMakeFiles/searchPagerank.dir
 C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/George/Desktop/UNSW/cs2521/ass2/scaledFootrule.c
+stdlib.h
+-
+stdio.h
+-
+string.h
+-
+math.h
+-
+assert.h
+-
+

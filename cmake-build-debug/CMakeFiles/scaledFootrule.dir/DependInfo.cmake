@@ -4,9 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "C:/Users/George/Desktop/UNSW/cs2521/ass2/Graph.c" "C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug/CMakeFiles/pagerank.dir/Graph.c.obj"
-  "C:/Users/George/Desktop/UNSW/cs2521/ass2/pagerank.c" "C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug/CMakeFiles/pagerank.dir/pagerank.c.obj"
-  "C:/Users/George/Desktop/UNSW/cs2521/ass2/url.c" "C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug/CMakeFiles/pagerank.dir/url.c.obj"
+  "C:/Users/George/Desktop/UNSW/cs2521/ass2/scaledFootrule.c" "C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug/CMakeFiles/scaledFootrule.dir/scaledFootrule.c.obj"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

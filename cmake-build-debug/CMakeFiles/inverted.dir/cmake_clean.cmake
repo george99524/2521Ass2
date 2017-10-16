@@ -1,5 +1,7 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/inverted.dir/BSTree.c.obj"
   "CMakeFiles/inverted.dir/Graph.c.obj"
+  "CMakeFiles/inverted.dir/url.c.obj"
   "CMakeFiles/inverted.dir/inverted.c.obj"
   "inverted.pdb"
   "inverted.exe"

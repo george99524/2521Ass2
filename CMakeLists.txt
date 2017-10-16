@@ -23,6 +23,11 @@ set(SOURCE_FILES_2
 
 add_executable(inverted ${SOURCE_FILES_2})
 
+set(SOURCE_FILES_4
+		scaledFootrule.c)
+
+add_executable(scaledFootrule ${SOURCE_FILES_4})
+
 set(SOURCE_FILES_3
 		url.c
 		url.h

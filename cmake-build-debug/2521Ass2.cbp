@@ -27,6 +27,50 @@
 					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
+			<Target title="inverted">
+				<Option output="C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug/inverted.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++/mingw32"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++/backward"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include-fixed"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug/Makefile&quot;  VERBOSE=1 inverted"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="inverted/fast">
+				<Option output="C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug/inverted.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++/mingw32"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++/backward"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include-fixed"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug/Makefile&quot;  VERBOSE=1 inverted/fast"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
 			<Target title="pagerank">
 				<Option output="C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug/pagerank.exe" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug"/>
@@ -71,6 +115,94 @@
 					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
+			<Target title="scaledFootrule">
+				<Option output="C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug/scaledFootrule.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++/mingw32"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++/backward"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include-fixed"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug/Makefile&quot;  VERBOSE=1 scaledFootrule"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="scaledFootrule/fast">
+				<Option output="C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug/scaledFootrule.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++/mingw32"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++/backward"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include-fixed"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug/Makefile&quot;  VERBOSE=1 scaledFootrule/fast"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="searchPagerank">
+				<Option output="C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug/searchPagerank.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++/mingw32"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++/backward"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include-fixed"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug/Makefile&quot;  VERBOSE=1 searchPagerank"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="searchPagerank/fast">
+				<Option output="C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug/searchPagerank.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++/mingw32"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++/backward"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include-fixed"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug/Makefile&quot;  VERBOSE=1 searchPagerank/fast"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
 			<Target title="rebuild_cache">
 				<Option working_dir="C:/Users/George/Desktop/UNSW/cs2521/ass2/cmake-build-debug"/>
 				<Option type="4"/>
@@ -82,20 +214,48 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="C:/Users/George/Desktop/UNSW/cs2521/ass2/BSTree.c">
+			<Option target="inverted"/>
+		</Unit>
+		<Unit filename="C:/Users/George/Desktop/UNSW/cs2521/ass2/BSTree.h">
+			<Option target="inverted"/>
+		</Unit>
 		<Unit filename="C:/Users/George/Desktop/UNSW/cs2521/ass2/Graph.c">
+			<Option target="inverted"/>
 			<Option target="pagerank"/>
+			<Option target="searchPagerank"/>
 		</Unit>
 		<Unit filename="C:/Users/George/Desktop/UNSW/cs2521/ass2/Graph.h">
+			<Option target="inverted"/>
 			<Option target="pagerank"/>
+			<Option target="searchPagerank"/>
 		</Unit>
 		<Unit filename="C:/Users/George/Desktop/UNSW/cs2521/ass2/graph.h">
+			<Option target="inverted"/>
 			<Option target="pagerank"/>
+			<Option target="searchPagerank"/>
+		</Unit>
+		<Unit filename="C:/Users/George/Desktop/UNSW/cs2521/ass2/inverted.c">
+			<Option target="inverted"/>
 		</Unit>
 		<Unit filename="C:/Users/George/Desktop/UNSW/cs2521/ass2/pagerank.c">
 			<Option target="pagerank"/>
 		</Unit>
-		<Unit filename="C:/Users/George/Desktop/UNSW/cs2521/ass2/pagerank.h">
+		<Unit filename="C:/Users/George/Desktop/UNSW/cs2521/ass2/scaledFootrule.c">
+			<Option target="scaledFootrule"/>
+		</Unit>
+		<Unit filename="C:/Users/George/Desktop/UNSW/cs2521/ass2/searchPagerank.c">
+			<Option target="searchPagerank"/>
+		</Unit>
+		<Unit filename="C:/Users/George/Desktop/UNSW/cs2521/ass2/url.c">
+			<Option target="inverted"/>
 			<Option target="pagerank"/>
+			<Option target="searchPagerank"/>
+		</Unit>
+		<Unit filename="C:/Users/George/Desktop/UNSW/cs2521/ass2/url.h">
+			<Option target="inverted"/>
+			<Option target="pagerank"/>
+			<Option target="searchPagerank"/>
 		</Unit>
 		<Unit filename="C:/Users/George/Desktop/UNSW/cs2521/ass2/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>

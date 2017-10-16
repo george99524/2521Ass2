@@ -49,5 +49,8 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
+  "CMakeFiles/inverted.dir/DependInfo.cmake"
   "CMakeFiles/pagerank.dir/DependInfo.cmake"
+  "CMakeFiles/scaledFootrule.dir/DependInfo.cmake"
+  "CMakeFiles/searchPagerank.dir/DependInfo.cmake"
   )

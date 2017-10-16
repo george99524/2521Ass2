@@ -56,9 +56,33 @@ include CMakeFiles/inverted.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/inverted.dir/flags.make
 
+CMakeFiles/inverted.dir/BSTree.c.obj: CMakeFiles/inverted.dir/flags.make
+CMakeFiles/inverted.dir/BSTree.c.obj: ../BSTree.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\George\Desktop\UNSW\cs2521\ass2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/inverted.dir/BSTree.c.obj"
+	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\inverted.dir\BSTree.c.obj   -c C:\Users\George\Desktop\UNSW\cs2521\ass2\BSTree.c
+
+CMakeFiles/inverted.dir/BSTree.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/inverted.dir/BSTree.c.i"
+	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\George\Desktop\UNSW\cs2521\ass2\BSTree.c > CMakeFiles\inverted.dir\BSTree.c.i
+
+CMakeFiles/inverted.dir/BSTree.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/inverted.dir/BSTree.c.s"
+	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\George\Desktop\UNSW\cs2521\ass2\BSTree.c -o CMakeFiles\inverted.dir\BSTree.c.s
+
+CMakeFiles/inverted.dir/BSTree.c.obj.requires:
+
+.PHONY : CMakeFiles/inverted.dir/BSTree.c.obj.requires
+
+CMakeFiles/inverted.dir/BSTree.c.obj.provides: CMakeFiles/inverted.dir/BSTree.c.obj.requires
+	$(MAKE) -f CMakeFiles\inverted.dir\build.make CMakeFiles/inverted.dir/BSTree.c.obj.provides.build
+.PHONY : CMakeFiles/inverted.dir/BSTree.c.obj.provides
+
+CMakeFiles/inverted.dir/BSTree.c.obj.provides.build: CMakeFiles/inverted.dir/BSTree.c.obj
+
+
 CMakeFiles/inverted.dir/Graph.c.obj: CMakeFiles/inverted.dir/flags.make
 CMakeFiles/inverted.dir/Graph.c.obj: ../Graph.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\George\Desktop\UNSW\cs2521\ass2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/inverted.dir/Graph.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\George\Desktop\UNSW\cs2521\ass2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/inverted.dir/Graph.c.obj"
 	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\inverted.dir\Graph.c.obj   -c C:\Users\George\Desktop\UNSW\cs2521\ass2\Graph.c
 
 CMakeFiles/inverted.dir/Graph.c.i: cmake_force
@@ -80,9 +104,33 @@ CMakeFiles/inverted.dir/Graph.c.obj.provides: CMakeFiles/inverted.dir/Graph.c.ob
 CMakeFiles/inverted.dir/Graph.c.obj.provides.build: CMakeFiles/inverted.dir/Graph.c.obj
 
 
+CMakeFiles/inverted.dir/url.c.obj: CMakeFiles/inverted.dir/flags.make
+CMakeFiles/inverted.dir/url.c.obj: ../url.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\George\Desktop\UNSW\cs2521\ass2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/inverted.dir/url.c.obj"
+	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\inverted.dir\url.c.obj   -c C:\Users\George\Desktop\UNSW\cs2521\ass2\url.c
+
+CMakeFiles/inverted.dir/url.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/inverted.dir/url.c.i"
+	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\George\Desktop\UNSW\cs2521\ass2\url.c > CMakeFiles\inverted.dir\url.c.i
+
+CMakeFiles/inverted.dir/url.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/inverted.dir/url.c.s"
+	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\George\Desktop\UNSW\cs2521\ass2\url.c -o CMakeFiles\inverted.dir\url.c.s
+
+CMakeFiles/inverted.dir/url.c.obj.requires:
+
+.PHONY : CMakeFiles/inverted.dir/url.c.obj.requires
+
+CMakeFiles/inverted.dir/url.c.obj.provides: CMakeFiles/inverted.dir/url.c.obj.requires
+	$(MAKE) -f CMakeFiles\inverted.dir\build.make CMakeFiles/inverted.dir/url.c.obj.provides.build
+.PHONY : CMakeFiles/inverted.dir/url.c.obj.provides
+
+CMakeFiles/inverted.dir/url.c.obj.provides.build: CMakeFiles/inverted.dir/url.c.obj
+
+
 CMakeFiles/inverted.dir/inverted.c.obj: CMakeFiles/inverted.dir/flags.make
 CMakeFiles/inverted.dir/inverted.c.obj: ../inverted.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\George\Desktop\UNSW\cs2521\ass2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/inverted.dir/inverted.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\George\Desktop\UNSW\cs2521\ass2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/inverted.dir/inverted.c.obj"
 	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\inverted.dir\inverted.c.obj   -c C:\Users\George\Desktop\UNSW\cs2521\ass2\inverted.c
 
 CMakeFiles/inverted.dir/inverted.c.i: cmake_force
@@ -106,19 +154,23 @@ CMakeFiles/inverted.dir/inverted.c.obj.provides.build: CMakeFiles/inverted.dir/i
 
 # Object files for target inverted
 inverted_OBJECTS = \
+"CMakeFiles/inverted.dir/BSTree.c.obj" \
 "CMakeFiles/inverted.dir/Graph.c.obj" \
+"CMakeFiles/inverted.dir/url.c.obj" \
 "CMakeFiles/inverted.dir/inverted.c.obj"
 
 # External object files for target inverted
 inverted_EXTERNAL_OBJECTS =
 
+inverted.exe: CMakeFiles/inverted.dir/BSTree.c.obj
 inverted.exe: CMakeFiles/inverted.dir/Graph.c.obj
+inverted.exe: CMakeFiles/inverted.dir/url.c.obj
 inverted.exe: CMakeFiles/inverted.dir/inverted.c.obj
 inverted.exe: CMakeFiles/inverted.dir/build.make
 inverted.exe: CMakeFiles/inverted.dir/linklibs.rsp
 inverted.exe: CMakeFiles/inverted.dir/objects1.rsp
 inverted.exe: CMakeFiles/inverted.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\George\Desktop\UNSW\cs2521\ass2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking C executable inverted.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\George\Desktop\UNSW\cs2521\ass2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking C executable inverted.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\inverted.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -126,7 +178,9 @@ CMakeFiles/inverted.dir/build: inverted.exe
 
 .PHONY : CMakeFiles/inverted.dir/build
 
+CMakeFiles/inverted.dir/requires: CMakeFiles/inverted.dir/BSTree.c.obj.requires
 CMakeFiles/inverted.dir/requires: CMakeFiles/inverted.dir/Graph.c.obj.requires
+CMakeFiles/inverted.dir/requires: CMakeFiles/inverted.dir/url.c.obj.requires
 CMakeFiles/inverted.dir/requires: CMakeFiles/inverted.dir/inverted.c.obj.requires
 
 .PHONY : CMakeFiles/inverted.dir/requires
