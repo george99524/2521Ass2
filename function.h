@@ -1,8 +1,9 @@
 // functions that need to be used by multiple files
 // for Assignment 2
+// Coded by George Bai/Eu Shaun Lim
 
-#ifndef PAGERANK_H
-#define PAGERANK_H
+#ifndef FUNCTION_H
+#define FUNCTION_H
 
 #include "graph.h"
 

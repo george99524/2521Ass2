@@ -10,7 +10,7 @@
 #include <math.h>
 #include "graph.h"
 #include <unistd.h>
-#include "url.h"
+#include "function.h"
 
 
 #define BUFSIZE 100
@@ -19,7 +19,6 @@ int read_urls();
 double get_tf(char *word, char *url);
 int isURL(char *word, int n_urls);
 int getIndex(char *url, int n_urls);
-void normalise(char word[]);
 void print_results(double *total, int n_urls);
 
 char **urls;
@@ -151,25 +150,6 @@ int getIndex(char *url, int n_urls) {
 		i++;
 	}
 	return -1;
-}
-
-void normalise(char word[]) {
-
-	// convert to lower case
-	//for (int i = 0; word[i]; i++) {
-	//	word[i] = tolower(word[i]);
-	//}
-	// remove all non-alphabets
-	for (int i = 0; word[i]; i++) {
-		word[i] = tolower(word[i]);
-		while (!(isalpha(word[i]) || word[i] == '\0')) {
-			int j = 0;
-			for (j = i; word[j] != '\0'; ++j) {
-				word[j] = word[j + 1];
-			}
-			word[j] = '\0';
-		}
-	}
 }
 
 void print_results(double *total, int n_urls) {
