@@ -6,8 +6,8 @@ set(CMAKE_CXX_STANDARD 11)
 set(SOURCE_FILES_1
 		Graph.c
 		graph.h
-		url.h
-		url.c
+		function.c
+		function.h
 		pagerank.c)
 
 add_executable(pagerank ${SOURCE_FILES_1})
@@ -17,22 +17,31 @@ set(SOURCE_FILES_2
 		BSTree.h
 		Graph.c
 		graph.h
-		url.h
-		url.c
+		function.c
+		function.h
 		inverted.c)
 
 add_executable(inverted ${SOURCE_FILES_2})
 
-set(SOURCE_FILES_4
-		scaledFootrule.c)
-
-add_executable(scaledFootrule ${SOURCE_FILES_4})
-
 set(SOURCE_FILES_3
-		url.c
-		url.h
+		function.c
+		function.h
 		Graph.c
 		graph.h
 		searchPagerank.c)
 
 add_executable(searchPagerank ${SOURCE_FILES_3})
+
+set(SOURCE_FILES_4
+		function.c
+		function.h
+		Graph.c
+		graph.h
+		searchTfIdf.c)
+
+add_executable(searchTfIdf.c ${SOURCE_FILES_4})
+
+set(SOURCE_FILES_5
+		scaledFootrule.c)
+
+add_executable(scaledFootrule ${SOURCE_FILES_5})
