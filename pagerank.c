@@ -15,19 +15,18 @@
 Graph buildGraph();
 int getID(char *string, char **list, int url_count);
 void getOutCount(int url_count, int *out_count);
-int buildInWeights(double **Weights, int url_count, Graph G);
-int buildOutWeights(double **Weights, int url_count, Graph G);
-double getWeightIn(int i, int j, int url_count, Graph G);
-double getWeightOut(int i, int j, int url_count, Graph G);
+int buildWin(double **Weights, int url_count, Graph G);
+int buildWout(double **Weights, int url_count, Graph G);
+double getWin(int i, int j, int url_count, Graph G);
+double getWout(int i, int j, int url_count, Graph G);
 double getInLink(int i, int url_count, Graph G);
 double getOutLink(int i, int url_count, Graph G);
-void getOutNode(int x, int url_count, Graph G, int *outNode);
 void sort(char **url_list, int *out_count, double *pr, int size);
 
 int main(int argc, char **argv) {
 
 	if (argc != 4) {
-		fprintf(stderr, "Not enough arguments");
+		fprintf(stderr, "Not enough arguments!\n");
 		return EXIT_FAILURE;
 	}
 
@@ -44,14 +43,14 @@ int main(int argc, char **argv) {
 		Win[i] = calloc(url_count, sizeof(double));
 	}
 	assert(Win != NULL);
-	buildInWeights(Win, url_count, g);
+	buildWin(Win, url_count, g);
 
 	double **Wout = calloc(url_count, sizeof(double *));
 	for (int i = 0; i < url_count; i++) {
 		Wout[i] = calloc(url_count, sizeof(double));
 	}
 	assert(Wout != NULL);
-	buildOutWeights(Wout, url_count, g);
+	buildWout(Wout, url_count, g);
 
 	double pr[url_count];    // array containing page ranks of each url
 	double prOld[url_count];    // old page ranks
@@ -69,29 +68,23 @@ int main(int argc, char **argv) {
 	// pagerank algorithm
 	int it = 0;
 	double diff = diffPR;
-	int *outNodes = calloc(url_count, sizeof(int));
 
 	while (it < maxIt && diff >= diffPR) {
+		it++;
 		for (i = 0; i < url_count; i++) {
 			int j;
-			// outNodes contain node with outgoing links to i
 			for (j = 0; j < url_count; j++) {
-				// -1 means no links yet
-				outNodes[j] = -1;
-				prOld[i] = pr[i];
+				prOld[j] = pr[j];	// copy to prOld before updating
 			}
-			getOutNode(i, url_count, g, outNodes);
 			double sum = 0;
 			for (j = 0; j < url_count; j++) {
-				if (outNodes[j] != -1) {
-					int x = outNodes[j];
-					sum += prOld[x] * Win[i][j] * Wout[i][j];
+				if (edgeExists(g, i, j)) {	// if j is an outgoing link to i
+					sum += pr[j] * Win[i][j] * Wout[i][j];
 				}
 			}
-			pr[i] = ((1 - d) / url_count) + (d * sum);
+			pr[i] = (1 - d) / url_count + d * sum;
 			diff += fabs(pr[i] - prOld[i]);
 		}
-		it++;
 	}
 
 	// get out degrees of URLs
@@ -118,6 +111,11 @@ int main(int argc, char **argv) {
 	//showGraph(g);
 	/////////// This is just printing out the Graph///////////////
 */
+	// free all memory
+	free(Win);
+	free(Wout);
+	free(outCount);
+	dropGraph(g);
 	return EXIT_SUCCESS;
 }
 
@@ -207,13 +205,13 @@ void getOutCount(int url_count, int *out_count) {
 }
 
 // build weights for Win
-int buildInWeights(double **Weights, int url_count, Graph G) {
+int buildWin(double **Weights, int url_count, Graph G) {
 	int i = 0;
 	while (i < url_count) {
 		int j = 0;
 		while (j < url_count) {
 			if (edgeExists(G, i, j)) {
-				Weights[i][j] = getWeightIn(i, j, url_count, G);
+				Weights[i][j] = getWin(i, j, url_count, G);
 			}
 			j++;
 		}
@@ -223,13 +221,13 @@ int buildInWeights(double **Weights, int url_count, Graph G) {
 }
 
 // build weights for Wout
-int buildOutWeights(double **Weights, int url_count, Graph G) {
+int buildWout(double **Weights, int url_count, Graph G) {
 	int i = 0;
 	while (i < url_count) {
 		int j = 0;
 		while (j < url_count) {
 			if (edgeExists(G, i, j) == 1) {
-				Weights[i][j] = getWeightOut(i, j, url_count, G);
+				Weights[i][j] = getWout(i, j, url_count, G);
 			}
 			j++;
 		}
@@ -239,7 +237,7 @@ int buildOutWeights(double **Weights, int url_count, Graph G) {
 }
 
 // calculates Win
-double getWeightIn(int i, int j, int url_count, Graph G) {
+double getWin(int i, int j, int url_count, Graph G) {
 	double weight = 0;
 
 	double nom = getInLink(j, url_count, G);
@@ -257,7 +255,7 @@ double getWeightIn(int i, int j, int url_count, Graph G) {
 }
 
 // calculates Wout
-double getWeightOut(int i, int j, int url_count, Graph G) {
+double getWout(int i, int j, int url_count, Graph G) {
 	double weight = 0;
 
 	double nom = getOutLink(j, url_count, G);
@@ -295,15 +293,6 @@ double getOutLink(int i, int url_count, Graph G) {
 	}
 	if (count == 0) count = 0.5;
 	return count;
-}
-
-// gets the node of outgoing links to x
-void getOutNode(int x, int url_count, Graph G, int *outNode) {
-	for (int i = 0; i < url_count; i++) {
-		if (edgeExists(G, x, i)) {
-			outNode[i] = i;
-		}
-	}
 }
 
 // sort URLs using bubble sort

@@ -1,5 +1,6 @@
 // Graph.c ... implementation of Graph ADT
 // Written by John Shepherd, May 2013
+// from lab09
 // modified for assignment use
 
 #include <stdlib.h>
@@ -77,7 +78,11 @@ Graph newGraph(int nV)
 void dropGraph(Graph g)
 {
 	assert(g != NULL);
-	// not needed for this lab
+	int i;
+	for (i = 0; i < g->nV; i++) {
+		free(g->edges[i]);
+	}
+	free(g->edges);
 }
 
 // display graph, using names for vertices

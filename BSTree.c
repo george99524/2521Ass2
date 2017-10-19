@@ -7,6 +7,7 @@
 #include <assert.h>
 #include <string.h>
 #include "BSTree.h"
+#include "function.h"
 
 typedef struct BSTNode *BSTLink;
 typedef struct BSTNode {
@@ -35,7 +36,7 @@ static
 BSTLink newBSTNode(char *v) {
 	BSTLink new = malloc(sizeof(BSTNode));
 	assert(new != NULL);
-	new->value = strdup(v);
+	new->value = str_dup(v);
 	new->URLList = newDLList();
 	new->left = new->right = NULL;
 	return new;
@@ -215,7 +216,7 @@ static DLListNode *newDLListNode(char *it) {
 	DLListNode *new;
 	new = malloc(sizeof(DLListNode));
 	assert(new != NULL);
-	new->url = strdup(it);
+	new->url = str_dup(it);
 	new->prev = new->next = NULL;
 	return new;
 }

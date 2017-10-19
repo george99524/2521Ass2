@@ -43,7 +43,6 @@ int main(int argc, char *argv[]) {
 		fp = fopen("invertedIndex.txt", "r");
 		while (fscanf(fp, "%s", url)!=EOF) {
 			if (strcmp(url, argv[i])==0) {
-				int j = 0;
 				int total_pages = 0;
 				while (fscanf(fp, "%s", buffer)!=EOF && isURL(buffer, n_urls)==1) {
 					total_pages++;

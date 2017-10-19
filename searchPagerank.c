@@ -9,7 +9,6 @@
 #include "function.h"
 
 void sortURL(char **urlList, int *urlCounter, int size);
-
 void sortPageRank(char **urlList, int *urlCounter, double *pagerankURL, int size);
 
 int main(int argc, char **argv) {
@@ -63,7 +62,7 @@ int main(int argc, char **argv) {
 				}
 				// add url to list if not
 				if (j == size) {
-					urlList[size] = strdup(url);
+					urlList[size] = str_dup(url);
 					urlCounter[size]++;
 					size++;
 				}
@@ -160,6 +159,7 @@ void sortURL(char **urlList, int *urlCounter, int size) {
 }
 
 // actual sorting for sortPageRank here
+static
 void sortPR(char **urlList, double *pagerankURL, int lCurs, int rCurs) {
 	int nswaps;
 	int size = rCurs;

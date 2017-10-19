@@ -60,3 +60,13 @@ void normalise(char word[]) {
 	}
 }
 
+char *str_dup(char *old) {
+	char *new;
+	int len = strlen(old);
+
+	new = malloc(len + 1);
+	if (new) {
+		memcpy(new, old, len + 1);
+	}
+	return new;
+}

@@ -16,4 +16,7 @@ void getURLList(int url_count, char **list);
 // normalise words by removing spaces and non-alphanumeric chars
 void normalise(char word[]);
 
+// strdup implementation
+char *str_dup(char *old);
+
 #endif
