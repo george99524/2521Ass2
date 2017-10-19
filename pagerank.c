@@ -1,3 +1,8 @@
+// COMP2521: Assignment 2: Simple Search Engines
+// Part-1: Graph structure-based Search Engine
+// A: Calculate Weighted PageRanks
+// Coded by George Bai/Eu Shaun Lim
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>
@@ -5,7 +10,19 @@
 #include "graph.h"
 #include <unistd.h>
 #include "math.h"
-#include "url.h"
+#include "function.h"
+
+Graph buildGraph();
+int getID(char *string, char **list, int url_count);
+void getOutCount(int url_count, int *out_count);
+int buildInWeights(double **Weights, int url_count, Graph G);
+int buildOutWeights(double **Weights, int url_count, Graph G);
+double getWeightIn(int i, int j, int url_count, Graph G);
+double getWeightOut(int i, int j, int url_count, Graph G);
+double getInLink(int i, int url_count, Graph G);
+double getOutLink(int i, int url_count, Graph G);
+void getOutNode(int x, int url_count, Graph G, int *outNode);
+void sort(char **url_list, int *out_count, double *pr, int size);
 
 int main(int argc, char **argv) {
 
@@ -21,88 +38,298 @@ int main(int argc, char **argv) {
 	int url_count = getURLCount();
 	Graph g = buildGraph();
 
-	double **In_Weights = calloc(url_count, sizeof(double *));
+	// get Win and Wout for all URLs
+	double **Win = calloc(url_count, sizeof(double *));
 	for (int i = 0; i < url_count; i++) {
-		In_Weights[i] = calloc(url_count, sizeof(double));
+		Win[i] = calloc(url_count, sizeof(double));
 	}
-	assert(In_Weights != NULL);
-	buildInWeights(In_Weights, url_count, g);
+	assert(Win != NULL);
+	buildInWeights(Win, url_count, g);
 
-	double **Out_Weights = calloc(url_count, sizeof(double *));
+	double **Wout = calloc(url_count, sizeof(double *));
 	for (int i = 0; i < url_count; i++) {
-		Out_Weights[i] = calloc(url_count, sizeof(double));
+		Wout[i] = calloc(url_count, sizeof(double));
 	}
-	assert(Out_Weights != NULL);
-	buildOutWeights(Out_Weights, url_count, g);
-
-    /////////// This is just printing out the Graph///////////////
-    for (int i = 0; i < url_count; i++) {
-        for (int j = 0; j < url_count; j++) {
-            printf("%3lf ", In_Weights[i][j]);
-        }
-        printf("\n");
-    }
-    printf("\n");
-    for (int i = 0; i < url_count; i++) {
-        for (int j = 0; j < url_count; j++) {
-            printf("%3lf ", Out_Weights[i][j]);
-        }
-        printf("\n");
-    }
-    //showGraph2(g);
-    /////////// This is just printing out the Graph///////////////
-
+	assert(Wout != NULL);
+	buildOutWeights(Wout, url_count, g);
 
 	double pr[url_count];    // array containing page ranks of each url
 	double prOld[url_count];    // old page ranks
 
 	// get initial pagerank for each URLs
-	for (int i = 0; i < url_count; i++) {
-		pr[i] = (double) 1 / url_count;
-		prOld[i] = pr[i];
+	int i;
+	for (i = 0; i < url_count; i++) {
+		prOld[i] = pr[i] = (double) 1 / url_count;
 	}
 
 	// get list of URLs
 	char *url_list[url_count];
 	getURLList(url_count, url_list);
 
-	// get out degrees of URLs
-	int outCount[url_count];
-	for (int i = 0; i < url_count; i++) {
-		outCount[i] = 0;
-	}
-	getOutCount(url_count, outCount);
-
 	// pagerank algorithm
 	int it = 0;
 	double diff = diffPR;
-	int *outID = calloc(url_count, sizeof(int));
-	for(int i=0;i<url_count;i++){
-		outID[i] = -1;
-	}
-	int sumPr = 0;
+	int *outNodes = calloc(url_count, sizeof(int));
+
 	while (it < maxIt && diff >= diffPR) {
-		for (int i = 0; i < url_count; i++) {
-			getOutLinkID(i, url_count, g, outID);
-			for(int j=0;j<url_count;j++){
-				sumPr += prOld[outID[j]];
+		for (i = 0; i < url_count; i++) {
+			int j;
+			// outNodes contain node with outgoing links to i
+			for (j = 0; j < url_count; j++) {
+				// -1 means no links yet
+				outNodes[j] = -1;
+				prOld[i] = pr[i];
 			}
-			pr[i] = ((1 - d) / url_count) + d*sumPr*In_Weights[i][j]*Out_Weights[i][j];
-			double tmp = fabs(pr[i] - prOld[i]);
-			diff += tmp;
-			for (int k=0;k<url_count;k++){
-				prOld[k] = pr[k];
+			getOutNode(i, url_count, g, outNodes);
+			double sum = 0;
+			for (j = 0; j < url_count; j++) {
+				if (outNodes[j] != -1) {
+					int x = outNodes[j];
+					sum += prOld[x] * Win[i][j] * Wout[i][j];
+				}
 			}
+			pr[i] = ((1 - d) / url_count) + (d * sum);
+			diff += fabs(pr[i] - prOld[i]);
 		}
 		it++;
 	}
 
+	// get out degrees of URLs
+	int *outCount = calloc(url_count, sizeof(int));
+	getOutCount(url_count, outCount);
+
+	// sort by pagerank values
+	sort(url_list, outCount, pr, url_count);
 	FILE *fp = fopen("pagerankList.txt", "w");
-	for (int i = 0; i < url_count; i++) {
+	for (i = 0; i < url_count; i++) {
 		fprintf(fp, "%s, %d, %.7lf\n", url_list[i], outCount[i], pr[i]);
 	}
 	fclose(fp);
-
+/*
+	/////////// This is just printing out the Graph///////////////
+	for (int i = 0; i < url_count; i++) {
+		for (int j = 0; j < url_count; j++) {
+			if(i==j) continue;
+			if(Win[i][j] == 0.0 || Wout[i][j] == 0.0) continue;
+			printf("Win[%d][%d]: %.7lf , Wout[%d][%d]: %.7lf \n", i, j, Win[i][j],  i, j, Wout[i][j]);
+		}
+		printf("\n");
+	}
+	//showGraph(g);
+	/////////// This is just printing out the Graph///////////////
+*/
 	return EXIT_SUCCESS;
 }
 
+// Builds Weighted Graph from collections.txt
+Graph buildGraph() {
+
+	int url_count = getURLCount();
+	Graph G = newGraph(url_count);
+	char *url_list[url_count];
+	getURLList(url_count, url_list);
+
+	FILE *fp;
+	fp = fopen("collection.txt", "r");
+	char buffer[100], url[100];
+	while (fscanf(fp, "%s", buffer) != EOF) {
+		char temp_string[1000];
+		strcpy(temp_string, buffer);
+		strcat(temp_string, ".txt");
+
+		FILE *temp = fopen(temp_string, "r");
+		int flag = 0;
+		while (fscanf(temp, "%s", url) != EOF) {
+			char section1[] = "Section-1";
+			char end[] = "#end";
+
+			if (strcmp(url, section1) == 0 && flag == 0) {
+				flag = 1;
+				continue;
+			}
+			if (strcmp(url, end) == 0 && flag == 1) break;
+			if (flag == 1) {
+				if (strcmp(url, buffer) == 0) continue;    // ignore self-loops
+				insertEdge(G, getID(buffer, url_list, url_count), getID(url, url_list, url_count), 1);
+			}
+		}
+	}
+
+	fclose(fp);
+	return G;
+}
+
+// gets ID of string
+int getID(char *string, char **list, int url_count) {
+	int id = 0;
+	while (id < url_count && strcmp(list[id], string)) {
+		id++;
+	}
+	return id == url_count ? -1 : id;
+}
+
+// get number of out links in each URL
+// and store them in out_count array
+void getOutCount(int url_count, int *out_count) {
+	FILE *fp;
+	if ((fp = fopen("collection.txt", "r")) == NULL) {
+		perror("collection.txt not found");
+		return;
+	}
+	char buffer[100];
+	char tmp_str[100];
+	char url[100];
+	int i = 0;
+	// read collection.txt
+	while (fscanf(fp, "%s", buffer) != EOF) {
+		strcpy(tmp_str, buffer);
+		strcat(tmp_str, ".txt");
+		FILE *fp2;
+		// open url*.txt in collection.txt
+		if ((fp2 = fopen(tmp_str, "r")) == NULL) {
+			perror("No such file");
+			return;
+		}
+		while (fscanf(fp2, "%s", url) != EOF) {
+			if (strcmp(url, buffer) == 0) continue;    // ignore self loops
+			if (strcmp(url, "#end") == 0) {        // no more URLs to count
+				i++;                            // move on to next URL
+				break;
+			}
+			out_count[i]++;
+		}
+		fclose(fp2);
+	}
+	for (i = 0; i < url_count; i++) {
+		out_count[i] -= 2;    //delete first 2 letters (#start Section-1)
+	}
+	fclose(fp);
+}
+
+// build weights for Win
+int buildInWeights(double **Weights, int url_count, Graph G) {
+	int i = 0;
+	while (i < url_count) {
+		int j = 0;
+		while (j < url_count) {
+			if (edgeExists(G, i, j)) {
+				Weights[i][j] = getWeightIn(i, j, url_count, G);
+			}
+			j++;
+		}
+		i++;
+	}
+	return 1;
+}
+
+// build weights for Wout
+int buildOutWeights(double **Weights, int url_count, Graph G) {
+	int i = 0;
+	while (i < url_count) {
+		int j = 0;
+		while (j < url_count) {
+			if (edgeExists(G, i, j) == 1) {
+				Weights[i][j] = getWeightOut(i, j, url_count, G);
+			}
+			j++;
+		}
+		i++;
+	}
+	return 1;
+}
+
+// calculates Win
+double getWeightIn(int i, int j, int url_count, Graph G) {
+	double weight = 0;
+
+	double nom = getInLink(j, url_count, G);
+	int x = 0;
+	double denom = 0;
+	while (x < url_count) {
+		if (edgeExists(G, i, x)) {
+			denom += getInLink(x, url_count, G);
+		}
+		x++;
+	}
+
+	weight = nom / denom;
+	return weight;
+}
+
+// calculates Wout
+double getWeightOut(int i, int j, int url_count, Graph G) {
+	double weight = 0;
+
+	double nom = getOutLink(j, url_count, G);
+	int x = 0;
+	double denom = 0;
+	while (x < url_count) {
+		if (edgeExists(G, i, x) == 1) {
+			denom += getOutLink(x, url_count, G);
+		}
+		x++;
+	}
+
+	weight = nom / denom;
+	return weight;
+}
+
+// gets number of URLs pointing to i
+double getInLink(int i, int url_count, Graph G) {
+	int x = 0;
+	double count = 0;
+	while (x < url_count) {
+		if (edgeExists(G, x, i) == 1) count++;
+		x++;
+	}
+	return count;
+}
+
+// gets number of URLs pointing out of i
+double getOutLink(int i, int url_count, Graph G) {
+	int x = 0;
+	double count = 0;
+	while (x < url_count) {
+		if (edgeExists(G, i, x) == 1) count++;
+		x++;
+	}
+	if (count == 0) count = 0.5;
+	return count;
+}
+
+// gets the node of outgoing links to x
+void getOutNode(int x, int url_count, Graph G, int *outNode) {
+	for (int i = 0; i < url_count; i++) {
+		if (edgeExists(G, x, i)) {
+			outNode[i] = i;
+		}
+	}
+}
+
+// sort URLs using bubble sort
+// modified from lab06
+void sort(char **url_list, int *out_count, double *pr, int size) {
+	int i, j, nswaps;
+	for (i = 0; i < size; i++) {
+		nswaps = 0;
+		for (j = size - 1; j > i; j--) {
+			if (pr[j] > pr[j - 1]) {
+				char tmpstr[30];
+				int tmp = out_count[j];
+				double tmpPr = pr[j];
+				strcpy(tmpstr, url_list[j]);
+				// sort out_count
+				out_count[j] = out_count[j - 1];
+				out_count[j - 1] = tmp;
+				// sort url_list
+				strcpy(url_list[j], url_list[j - 1]);
+				strcpy(url_list[j - 1], tmpstr);
+				// sort pagerank
+				pr[j] = pr[j - 1];
+				pr[j - 1] = tmpPr;
+				nswaps++;
+			}
+		}
+		if (nswaps == 0) break;
+	}
+}

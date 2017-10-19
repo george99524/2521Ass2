@@ -1,6 +1,11 @@
+// COMP2521: Assignment 2: Simple Search Engines
+// Part-1: Graph structure-based Search Engine
+// B: Inverted Index
+// Coded by George Bai/Eu Shaun Lim
+
 #include <stdlib.h>
 #include <stdio.h>
-#include "url.h"
+#include "function.h"
 #include "BSTree.h"
 #include <string.h>
 
@@ -44,7 +49,7 @@ int main() {
 		}
 		fclose(fp);
 	}
-
+	//showBSTree(URLTree);
 	// print words and associated URLs into invertedIndex.txt
 	FILE *fp1 = fopen("invertedIndex.txt", "w");
 	BSTreePutInfix(URLTree, fp1);

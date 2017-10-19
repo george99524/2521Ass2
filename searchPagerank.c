@@ -1,70 +1,16 @@
+// COMP2521: Assignment 2: Simple Search Engines
+// Part-1: Graph structure-based Search Engine
+// C: Search Engine
+// Coded by George Bai/Eu Shaun Lim
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include "url.h"
+#include "function.h"
 
-// sort URLs using bubble sort
-// modified from lab06
-void sortURL(char **urlList, int *urlCounter, int size) {
-	int i, j, nswaps;
-	for (i = 0; i < size; i++) {
-		nswaps = 0;
-		for (j = size - 1; j > i; j--) {
-			if (urlCounter[j] > urlCounter[j - 1]) {
-				char tmpstr[30];
-				int tmp = urlCounter[j];
-				strcpy(tmpstr, urlList[j]);
-				// sort urlCounter
-				urlCounter[j] = urlCounter[j - 1];
-				urlCounter[j - 1] = tmp;
-				// sort urlList
-				strcpy(urlList[j], urlList[j - 1]);
-				strcpy(urlList[j - 1], tmpstr);
-				nswaps++;
-			}
-		}
-		if (nswaps == 0) break;
-	}
-}
+void sortURL(char **urlList, int *urlCounter, int size);
 
-// actual sorting for sortPageRank here
-void sortPR(char **urlList, double *pagerankURL, int lCurs, int rCurs) {
-	int nswaps;
-	int size = rCurs;
-	for (; lCurs < size; lCurs++) {
-		nswaps = 0;
-		for (; rCurs > lCurs; rCurs--) {
-			if (pagerankURL[rCurs] > pagerankURL[rCurs - 1]) {
-				char tmpstr[30];
-				double tmp = pagerankURL[rCurs];
-				strcpy(tmpstr, urlList[rCurs]);
-				// sort pagerankURL
-				pagerankURL[rCurs] = pagerankURL[rCurs - 1];
-				pagerankURL[rCurs - 1] = tmp;
-				// sort urlList
-				strcpy(urlList[rCurs], urlList[rCurs - 1]);
-				strcpy(urlList[rCurs - 1], tmpstr);
-				nswaps++;
-			}
-		}
-		if (nswaps == 0) break;
-	}
-}
-
-// sort URLs by pagerank values
-void sortPageRank(char **urlList, int *urlCounter, double *pagerankURL, int size) {
-	int lCurs = 0;
-	int rCurs = 1;
-	while (lCurs < size) {
-		if (urlCounter[lCurs] == urlCounter[rCurs]) {
-			sortPR(urlList, pagerankURL, lCurs, rCurs);
-			rCurs++;
-		} else {
-			while (lCurs != rCurs) lCurs++;
-			rCurs = lCurs + 1;
-		}
-	}
-}
+void sortPageRank(char **urlList, int *urlCounter, double *pagerankURL, int size);
 
 int main(int argc, char **argv) {
 	if (argc < 2) {
@@ -76,6 +22,7 @@ int main(int argc, char **argv) {
 	// copy arguments to array of string
 	for (int i = 0; i < argc - 1; i++) {
 		keyWords[i] = argv[i + 1];
+		normalise(keyWords[i]);
 		numWords++;
 	}
 	// open invertedIndex.txt
@@ -107,7 +54,7 @@ int main(int argc, char **argv) {
 				   url[2] == 'l') {
 				// check if url has already been added to list
 				// increment counter if yes
-				int j = 0;
+				int j;
 				for (j = 0; j < size; j++) {
 					if (strcmp(urlList[j], url) == 0) {
 						urlCounter[j]++;
@@ -186,4 +133,67 @@ int main(int argc, char **argv) {
 */
 
 	return EXIT_SUCCESS;
+}
+
+// sort URLs using bubble sort
+// modified from lab06
+void sortURL(char **urlList, int *urlCounter, int size) {
+	int i, j, nswaps;
+	for (i = 0; i < size; i++) {
+		nswaps = 0;
+		for (j = size - 1; j > i; j--) {
+			if (urlCounter[j] > urlCounter[j - 1]) {
+				char tmpstr[30];
+				int tmp = urlCounter[j];
+				strcpy(tmpstr, urlList[j]);
+				// sort urlCounter
+				urlCounter[j] = urlCounter[j - 1];
+				urlCounter[j - 1] = tmp;
+				// sort urlList
+				strcpy(urlList[j], urlList[j - 1]);
+				strcpy(urlList[j - 1], tmpstr);
+				nswaps++;
+			}
+		}
+		if (nswaps == 0) break;
+	}
+}
+
+// actual sorting for sortPageRank here
+void sortPR(char **urlList, double *pagerankURL, int lCurs, int rCurs) {
+	int nswaps;
+	int size = rCurs;
+	for (; lCurs < size; lCurs++) {
+		nswaps = 0;
+		for (; rCurs > lCurs; rCurs--) {
+			if (pagerankURL[rCurs] > pagerankURL[rCurs - 1]) {
+				char tmpstr[30];
+				double tmp = pagerankURL[rCurs];
+				strcpy(tmpstr, urlList[rCurs]);
+				// sort pagerankURL
+				pagerankURL[rCurs] = pagerankURL[rCurs - 1];
+				pagerankURL[rCurs - 1] = tmp;
+				// sort urlList
+				strcpy(urlList[rCurs], urlList[rCurs - 1]);
+				strcpy(urlList[rCurs - 1], tmpstr);
+				nswaps++;
+			}
+		}
+		if (nswaps == 0) break;
+	}
+}
+
+// sort URLs by pagerank values
+void sortPageRank(char **urlList, int *urlCounter, double *pagerankURL, int size) {
+	int lCurs = 0;
+	int rCurs = 1;
+	while (lCurs < size) {
+		if (urlCounter[lCurs] == urlCounter[rCurs]) {
+			sortPR(urlList, pagerankURL, lCurs, rCurs);
+			rCurs++;
+		} else {
+			while (lCurs != rCurs) lCurs++;
+			rCurs = lCurs + 1;
+		}
+	}
 }

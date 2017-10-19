@@ -22,9 +22,9 @@ void removeEdge(Graph, Vertex, Vertex);
 Graph newGraph(int nV);
 void dropGraph(Graph);
 Graph makeGraph(int, int**);
-void showGraph(Graph, char **);
+
+void showGraph(Graph);
 int edgeExists(Graph g, int i, int j);
-void showGraph2(Graph g);
 int  findPath(Graph, Vertex, Vertex, int, int *);
 
 #endif

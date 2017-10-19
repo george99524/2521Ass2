@@ -1,5 +1,6 @@
 // Graph.c ... implementation of Graph ADT
 // Written by John Shepherd, May 2013
+// modified for assignment use
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -36,7 +37,7 @@ void insertEdge(Graph g, Vertex v, Vertex w, int wt)
 	assert(g != NULL && validV(g,v) && validV(g,w));
 	if (g->edges[v][w] == 0) {
 		g->edges[v][w] = wt;
-		g->edges[w][v] = wt;
+		//g->edges[w][v] = wt;
 		g->nE++;
 	}
 }
@@ -80,28 +81,7 @@ void dropGraph(Graph g)
 }
 
 // display graph, using names for vertices
-void showGraph(Graph g, char **names)
-{
-	assert(g != NULL);
-	printf("#vertices=%d, #edges=%d\n\n",g->nV,g->nE);
-	int v, w;
-	for (v = 0; v < g->nV; v++) {
-		printf("%d %s\n",v,names[v]);
-		for (w = 0; w < g->nV; w++) {
-			if (g->edges[v][w]) {
-				printf("\t%s (%d)\n",names[w],g->edges[v][w]);
-			}
-		}
-		printf("\n");
-	}
-}
-
-int edgeExists(Graph g, int i, int j) {
-	assert(g != NULL);
-	return g->edges[i][j]==1;
-}
-
-void showGraph2(Graph g)
+void showGraph(Graph g)
 {
 	assert(g != NULL);
 	printf("#vertices=%d, #edges=%d\n\n",g->nV,g->nE);
@@ -112,4 +92,9 @@ void showGraph2(Graph g)
 		}
 		printf("\n");
 	}
+}
+
+int edgeExists(Graph g, int i, int j) {
+	assert(g != NULL);
+	return g->edges[i][j]==1;
 }
