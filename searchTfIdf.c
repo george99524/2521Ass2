@@ -21,9 +21,6 @@ int read_urls();
 // Get tf value for a specified word and url
 double get_tf(char *word, char *url);
 
-// Check if supplied word is a url
-int isURL(char *word, int n_urls);
-
 // Get the index of a url in the global urls array
 int getIndex(char *url, int n_urls);
 
@@ -175,16 +172,6 @@ double get_tf(char *word, char *url) {
 	}
 	//printf("\n%d %d\n", word_count, total_count);
 	return (double) word_count/total_count;
-}
-
-
-int isURL(char *word, int n_urls) {
-	int i = 0;
-	while (i<n_urls) {
-		if (strcmp(urls[i], word)==0) return 1;
-		i++;
-	}
-	return 0;
 }
 
 int getIndex(char *url, int n_urls) {
