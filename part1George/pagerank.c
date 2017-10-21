@@ -102,6 +102,7 @@ int main(int argc, char **argv) {
 		fprintf(fp, "%s, %d, %.7lf\n", url_list[i], outCount[i], pr[i]);
 	}
 	fclose(fp);
+
 /*
 	/////////// This is just printing out the Graph///////////////
 	for (int i = 0; i < url_count; i++) {
