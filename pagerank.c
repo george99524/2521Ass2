@@ -12,15 +12,34 @@
 #include "math.h"
 #include "function.h"
 
+// creates graph based on URLs in collection.txt
 Graph buildGraph();
+
+// get node of URL
 int getID(char *string, char **list, int url_count);
-void getOutCount(int url_count, int *out_count);
+
+// gets number of out-degrees of all URLs and stores them in an array
+void getOutDegree(int url_count, int *out_degree);
+
+// stores all Win values in a 2d array
 int buildWin(double **Weights, int url_count, Graph G);
+
+// stores all Wout values in a 2d array
 int buildWout(double **Weights, int url_count, Graph G);
+
+// gets specific Win value
 double getWin(int i, int j, int url_count, Graph G);
+
+// gets specific Wout value
 double getWout(int i, int j, int url_count, Graph G);
+
+// gets number of in-link to a URL
 double getInLink(int i, int url_count, Graph G);
+
+// gets number of out-link of a URL
 double getOutLink(int i, int url_count, Graph G);
+
+// sorts URLs and their out-degrees by pagerank values
 void sort(char **url_list, int *out_count, double *pr, int size);
 
 int main(int argc, char **argv) {
@@ -30,14 +49,17 @@ int main(int argc, char **argv) {
 		return EXIT_FAILURE;
 	}
 
+	// convert arguments to double
 	double d = atof(argv[1]);
 	double diffPR = atof(argv[2]);
 	double maxIt = atof(argv[3]);
 
+	// get total number of URLs in collection.txt
 	int url_count = getURLCount();
+	// build graph based on URLs in collection.txt
 	Graph g = buildGraph();
 
-	// get Win and Wout for all URLs
+	// get Win values for all URLs
 	double **Win = calloc(url_count, sizeof(double *));
 	for (int i = 0; i < url_count; i++) {
 		Win[i] = calloc(url_count, sizeof(double));
@@ -45,6 +67,7 @@ int main(int argc, char **argv) {
 	assert(Win != NULL);
 	buildWin(Win, url_count, g);
 
+	// get Wout values for all URLs
 	double **Wout = calloc(url_count, sizeof(double *));
 	for (int i = 0; i < url_count; i++) {
 		Wout[i] = calloc(url_count, sizeof(double));
@@ -84,6 +107,7 @@ int main(int argc, char **argv) {
 			}
 			pr[i] = (1 - d) / url_count + d * sum;
 
+			// calculate difference between new and old pagerank value
 			diff = 0.0;
 			for (j = 0; j < url_count; j++) {
 				diff += fabs(pr[i] - prOld[i]);
@@ -92,14 +116,14 @@ int main(int argc, char **argv) {
 	}
 
 	// get out degrees of URLs
-	int *outCount = calloc(url_count, sizeof(int));
-	getOutCount(url_count, outCount);
+	int *outDegree = calloc(url_count, sizeof(int));
+	getOutDegree(url_count, outDegree);
 
-	// sort by pagerank values
-	sort(url_list, outCount, pr, url_count);
+	// sort by pagerank values and print to pagerankList.txt
+	sort(url_list, outDegree, pr, url_count);
 	FILE *fp = fopen("pagerankList.txt", "w");
 	for (i = 0; i < url_count; i++) {
-		fprintf(fp, "%s, %d, %.7lf\n", url_list[i], outCount[i], pr[i]);
+		fprintf(fp, "%s, %d, %.7lf\n", url_list[i], outDegree[i], pr[i]);
 	}
 	fclose(fp);
 /*
@@ -118,7 +142,7 @@ int main(int argc, char **argv) {
 	// free all memory
 	free(Win);
 	free(Wout);
-	free(outCount);
+	free(outDegree);
 	dropGraph(g);
 	return EXIT_SUCCESS;
 }
@@ -126,16 +150,18 @@ int main(int argc, char **argv) {
 // Builds Weighted Graph from collections.txt
 Graph buildGraph() {
 
+	// get number and list of URLs
 	int url_count = getURLCount();
 	Graph G = newGraph(url_count);
 	char *url_list[url_count];
 	getURLList(url_count, url_list);
 
-	FILE *fp;
-	fp = fopen("collection.txt", "r");
+	// open collection.txt to read
+	FILE *fp = fopen("collection.txt", "r");
 	char buffer[100], url[100];
 	while (fscanf(fp, "%s", buffer) != EOF) {
 		char temp_string[1000];
+		//copy url in collection.txt and open it
 		strcpy(temp_string, buffer);
 		strcat(temp_string, ".txt");
 
@@ -146,11 +172,11 @@ Graph buildGraph() {
 			char end[] = "#end";
 
 			if (strcmp(url, section1) == 0 && flag == 0) {
-				flag = 1;
+				flag = 1;	// set flag to 1 when in Section 1
 				continue;
 			}
-			if (strcmp(url, end) == 0 && flag == 1) break;
-			if (flag == 1) {
+			if (strcmp(url, end) == 0 && flag == 1) break;	// reached end of Section 1
+			if (flag == 1) {	// means pointer is in Section 1
 				if (strcmp(url, buffer) == 0) continue;    // ignore self-loops
 				insertEdge(G, getID(buffer, url_list, url_count), getID(url, url_list, url_count), 1);
 			}
@@ -170,9 +196,9 @@ int getID(char *string, char **list, int url_count) {
 	return id == url_count ? -1 : id;
 }
 
-// get number of out links in each URL
-// and store them in out_count array
-void getOutCount(int url_count, int *out_count) {
+// get number of out-degrees in each URL
+// and store them in out_degree array
+void getOutDegree(int url_count, int *out_degree) {
 	FILE *fp;
 	if ((fp = fopen("collection.txt", "r")) == NULL) {
 		perror("collection.txt not found");
@@ -198,12 +224,12 @@ void getOutCount(int url_count, int *out_count) {
 				i++;                            // move on to next URL
 				break;
 			}
-			out_count[i]++;
+			out_degree[i]++;
 		}
 		fclose(fp2);
 	}
 	for (i = 0; i < url_count; i++) {
-		out_count[i] -= 2;    //delete first 2 letters (#start Section-1)
+		out_degree[i] -= 2;    //delete first 2 letters (#start Section-1)
 	}
 	fclose(fp);
 }
