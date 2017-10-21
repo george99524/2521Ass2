@@ -70,3 +70,15 @@ char *str_dup(char *old) {
 	}
 	return new;
 }
+
+int isURL(char *word, int n_urls) {
+	int i = 0;
+	int n = getURLCount();
+	char *urls[n];
+	getURLList(n, urls);
+	while (i<n_urls) {
+		if (strcmp(urls[i], word)==0) return 1;
+		i++;
+	}
+	return 0;
+}

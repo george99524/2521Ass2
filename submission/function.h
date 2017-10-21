@@ -19,4 +19,7 @@ void normalise(char word[]);
 // strdup implementation
 char *str_dup(char *old);
 
+// check if word is a URL
+int isURL(char *word, int n_urls);
+
 #endif

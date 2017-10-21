@@ -36,9 +36,7 @@ int main() {
 				strcmp(words, "#end") == 0 ||
 				strcmp(words, "Section-1") == 0 ||
 				strcmp(words, "Section-2") == 0 ||
-				words[0] == 'u' ||
-				words[1] == 'r' ||
-				words[2] == 'l')
+				isURL(words, url_count))
 				continue;
 			// normalise word before inserting
 			normalise(words);
