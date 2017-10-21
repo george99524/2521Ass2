@@ -26,6 +26,14 @@ char **urls;
 int main(int argc, char *argv[]) {
 	int n_urls = read_urls();
 	int n_words = argc - 1;
+	char *words[n_words];
+	for (int i = 0; i < n_words; i++) {
+		words[i] = malloc(sizeof(argv[i+1]));
+		strcpy(words[i], argv[i+1]);
+		normalise(words[i]);
+		printf("%s\n", words[i]);
+	}
+
 	FILE *fp;
 	char url[BUFSIZE], buffer[BUFSIZE];
 
@@ -39,17 +47,17 @@ int main(int argc, char *argv[]) {
 	memset(total, 0.0, sizeof(double) * n_urls);
 
 	int *url_count = calloc(n_words, sizeof(int));
-	for (int i=1; i<=n_words; i++) {
+	for (int i = 0; i < n_words; i++) {
 		fp = fopen("invertedIndex.txt", "r");
 		while (fscanf(fp, "%s", url)!=EOF) {
-			if (strcmp(url, argv[i])==0) {
+			if (strcmp(url, words[i])==0) {
 				int total_pages = 0;
 				while (fscanf(fp, "%s", buffer)!=EOF && isURL(buffer, n_urls)==1) {
 					total_pages++;
-					tf[i-1][getIndex(buffer, n_urls)] = get_tf(argv[i], buffer);
-					url_count[i-1]++;
-					//printf("url count for word %s is %d\n", argv[i], url_count[i-1]);
-					//printf("%s\n", argv[i]);
+					tf[i][getIndex(buffer, n_urls)] = get_tf(words[i], buffer);
+					url_count[i]++;
+					//printf("url count for word %s is %d\n", words[i], url_count[i-1]);
+					//printf("%s\n", words[i]);
 					//printf("%s\n", buffer);
 					//printf("%d\n", getIndex(buffer, n_urls));
 				}
