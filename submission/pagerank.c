@@ -338,15 +338,19 @@ void sort(char **url_list, int *out_count, double *pr, int size) {
 				int tmp = out_count[j];
 				double tmpPr = pr[j];
 				strcpy(tmpstr, url_list[j]);
+
 				// sort out_count
 				out_count[j] = out_count[j - 1];
 				out_count[j - 1] = tmp;
+
 				// sort url_list
 				strcpy(url_list[j], url_list[j - 1]);
 				strcpy(url_list[j - 1], tmpstr);
+
 				// sort pagerank
 				pr[j] = pr[j - 1];
 				pr[j - 1] = tmpPr;
+				
 				nswaps++;
 			}
 		}

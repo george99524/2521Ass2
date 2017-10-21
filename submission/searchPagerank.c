@@ -116,6 +116,8 @@ int main(int argc, char **argv) {
 			printf("%s\n", urlList[j]);
 		}
 	}
+
+// used to make sure order is correct
 /*
 	printf("\n");
 	for (int j = 0; j < size; j++) {
@@ -145,12 +147,15 @@ void sortURL(char **urlList, int *urlCounter, int size) {
 				char tmpstr[30];
 				int tmp = urlCounter[j];
 				strcpy(tmpstr, urlList[j]);
+
 				// sort urlCounter
 				urlCounter[j] = urlCounter[j - 1];
 				urlCounter[j - 1] = tmp;
+
 				// sort urlList
 				strcpy(urlList[j], urlList[j - 1]);
 				strcpy(urlList[j - 1], tmpstr);
+
 				nswaps++;
 			}
 		}
@@ -159,6 +164,7 @@ void sortURL(char **urlList, int *urlCounter, int size) {
 }
 
 // actual sorting for sortPageRank here
+// standard bubble sort algorithm
 static
 void sortPR(char **urlList, double *pagerankURL, int lCurs, int rCurs) {
 	int nswaps;
@@ -170,12 +176,15 @@ void sortPR(char **urlList, double *pagerankURL, int lCurs, int rCurs) {
 				char tmpstr[30];
 				double tmp = pagerankURL[rCurs];
 				strcpy(tmpstr, urlList[rCurs]);
+
 				// sort pagerankURL
 				pagerankURL[rCurs] = pagerankURL[rCurs - 1];
 				pagerankURL[rCurs - 1] = tmp;
+
 				// sort urlList
 				strcpy(urlList[rCurs], urlList[rCurs - 1]);
 				strcpy(urlList[rCurs - 1], tmpstr);
+
 				nswaps++;
 			}
 		}
@@ -185,15 +194,15 @@ void sortPR(char **urlList, double *pagerankURL, int lCurs, int rCurs) {
 
 // sort URLs by pagerank values
 void sortPageRank(char **urlList, int *urlCounter, double *pagerankURL, int size) {
-	int lCurs = 0;
-	int rCurs = 1;
+	int lCurs = 0;	// left cursor
+	int rCurs = 1;	// right cursor
 	while (lCurs < size) {
-		if (urlCounter[lCurs] == urlCounter[rCurs]) {
+		if (urlCounter[lCurs] == urlCounter[rCurs]) {	// sort iff same urlCounter
 			sortPR(urlList, pagerankURL, lCurs, rCurs);
-			rCurs++;
+			rCurs++;	// increment and check again if counter is still same
 		} else {
-			while (lCurs != rCurs) lCurs++;
-			rCurs = lCurs + 1;
+			lCurs = rCurs;		// if counter is different move lCurs = rCurs
+			rCurs = lCurs + 1;	// and increment rCurs
 		}
 	}
 }
