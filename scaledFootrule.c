@@ -79,7 +79,7 @@ int main(int argc, char *argv[]) {
 		lowest = -1.0; // reset lowest value
 	}
 
-	printf("%lf\n", total); // printing the results
+	printf("%.6f\n", total); // printing the results
 	for (int i = 0; i<n_urls; i++) {
 		for (int j = 0; j<n_urls; j++) {
 			if (order[j]==i) printf("%s\n", url_list[j]);
