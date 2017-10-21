@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
 		words[i] = malloc(sizeof(argv[i+1]));
 		strcpy(words[i], argv[i+1]);
 		normalise(words[i]);
-		printf("%s\n", words[i]);
+		//printf("%s\n", words[i]);
 	}
 
 	FILE *fp;
@@ -67,12 +67,12 @@ int main(int argc, char *argv[]) {
 	}
 	for (int i=0; i<n_words; i++) {
 		for (int j=0; j<n_urls; j++) {
-			printf("for url %s\n", urls[j]);
-			printf("tf = %lf\n", tf[i][j]);
-			printf("n_w = %d\n", url_count[i]);
+			//printf("for url %s\n", urls[j]);
+			//printf("tf = %lf\n", tf[i][j]);
+			//printf("n_w = %d\n", url_count[i]);
 			tf_idf[i][j] = tf[i][j] * log10((double) n_urls/url_count[i]);
 			if (url_count[i]==0 || tf[i][j]==0.0) tf_idf[i][j] = 0.0;
-			printf("tf_idf = %lf\n\n", tf_idf[i][j]);
+			//printf("tf_idf = %lf\n\n", tf_idf[i][j]);
 
 		}
 		//printf("\n");
