@@ -59,18 +59,19 @@ int main(int argc, char *argv[]) {
 	}
 	for (int i=0; i<n_words; i++) {
 		for (int j=0; j<n_urls; j++) {
-			//printf("tf = %lf\n", tf[i][j]);
-			//printf("n_w = %d\n", url_count[i]);
+			printf("for url %s\n", urls[j]);
+			printf("tf = %lf\n", tf[i][j]);
+			printf("n_w = %d\n", url_count[i]);
 			tf_idf[i][j] = tf[i][j] * log10((double) n_urls/url_count[i]);
 			if (url_count[i]==0 || tf[i][j]==0.0) tf_idf[i][j] = 0.0;
-			//printf("tf_idf = %lf\n\n", tf_idf[i][j]);
+			printf("tf_idf = %lf\n\n", tf_idf[i][j]);
 
 		}
 		//printf("\n");
 	}
 	for (int i=0; i<n_urls; i++) {
 		for (int j=0; j<n_words; j++) {
-			total[i] += tf_idf[i][j];
+			total[i] += tf_idf[j][i];
 		}
 		//printf("total = %lf\n", total[i]);
 	}
@@ -163,7 +164,7 @@ void print_results(double *total, int n_urls) {
 				index = j;
 			}
 		}
-		printf("%s %.6f\n", urls[index], greatest);
+		if (greatest!=0) printf("%s %.6f\n", urls[index], greatest);
 		flag[index] = 1;
 		i++;
 	}
