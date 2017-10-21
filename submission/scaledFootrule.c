@@ -11,8 +11,13 @@
 #define BUFSIZE 100
 #define MAX_URLS 100
 
+// Check if a url is part of the list supplied
 int inList(char **list, char *url, int list_size);
+
+// Show the list supplied
 void showList(char **list, int list_size);
+
+// Compute the scaled-footrule distance with the supplied values
 double getScaledFootrule(char *url, int n_lists, char **list_names, int position, int total_positions);
 
 
@@ -56,6 +61,12 @@ int main(int argc, char *argv[]) {
 		//printf("i=%d\n", i);
 	}
 
+	// In order to compute the minimum scaled-footrule distance, I used the matrix I created beforehand
+	// and simply picked out the smallest value (>=0), one at a time. I then marked the position(column)
+	// and the url(row) with a flag so that I would never consider those columns/rows again. This is the
+	// same as marking out a url and a position, as we obviously cannot use them more than once. This is
+	// repeated until all of the positions are filled, and the minimum value is computed.
+
 	char row_flag[n_urls], column_flag[n_urls]; // boolean flags for each row and column in the matrix
 	memset(row_flag, 0.0, sizeof(char)*n_urls);
 	memset(column_flag, 0.0, sizeof(char)*n_urls);
@@ -79,7 +90,7 @@ int main(int argc, char *argv[]) {
 		lowest = -1.0; // reset lowest value
 	}
 
-	printf("%.6lf\n", total); // printing the results
+	printf("%.6f\n", total); // printing the results
 	for (int i = 0; i<n_urls; i++) {
 		for (int j = 0; j<n_urls; j++) {
 			if (order[j]==i) printf("%s\n", url_list[j]);
