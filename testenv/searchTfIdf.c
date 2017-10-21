@@ -170,13 +170,18 @@ int getIndex(char *url, int n_urls) {
 }
 
 void print_results(double *total, int n_urls, int *word_appearance) {
-	char flag[n_urls];
+	char *flag = calloc(n_urls, sizeof(char));
 	int i = 0;
 	while (i<n_urls && i<30) {
 		double greatest = 0.0;
 		int greatest_word_appearance = 0;
 		int index;
 		for (int j = 0; j<n_urls; j++) {
+			if (word_appearance[j]>greatest_word_appearance && flag[j]!=1) {
+				greatest = total[j];
+				index = j;
+				greatest_word_appearance = word_appearance[j];
+			}else
 			if (word_appearance[j]>=greatest_word_appearance && total[j]>greatest && flag[j]!=1) {
 				greatest = total[j];
 				index = j;
